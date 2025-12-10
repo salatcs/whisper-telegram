@@ -49,8 +49,8 @@ It works primarily via **Inline Mode**, meaning you can use it in any chat witho
     -   Manual username/ID entry.
     -   Select user from contacts via private chat.
 -   **Internationalization (i18n):**
-    -   🇺🇸 English
-    -   🇷🇺 Russian
+    -   :flag_united_states: English
+    -   :flag_russia: Russian
 -   **Robust Backend:** Built with asynchronous Python and PostgreSQL.
 
 ## 🚀 Installation
