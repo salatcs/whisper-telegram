@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    container_name: whisper_bot
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+    depends_on:
+      - db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  db:
+    image: postgres:15-alpine
+    container_name: whisper_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-whisper}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pg_data:
