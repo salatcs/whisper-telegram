@@ -39,9 +39,11 @@ def init_logging():
 
     else:
         handlers.append(logging.StreamHandler())
-
+    
     logging.basicConfig(
         level=log_level,
         format=log_format,
         handlers=handlers
     )
+    
+    logging.getLogger('aiogram.event').propagate = False
